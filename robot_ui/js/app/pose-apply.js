@@ -1,0 +1,1 @@
+../../../ui/js/app/pose-apply.js

@@ -1,0 +1,2 @@
+python-dotenv>=1.0.1
+sora-sdk>=2024.3.0
