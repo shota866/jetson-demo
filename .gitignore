@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+
+# Node assets
+ui/node_modules/
+
+# macOS
+.DS_Store
+.env
+server/.env
+.DS_Store
+robot_ui/assets/kenney_car-kit/
