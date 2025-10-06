@@ -5,7 +5,7 @@ user.py
 - Tk の ↑←→↓ ボタン/矢印キーで {"t":"cmd","v":"UP|DOWN|LEFT|RIGHT"} を DataChannel '#ctrl' に送信
 - DataChannel '#state' を受信して、キャンバス上のロボット位置/向きを更新
 - .env 例:
-    SORA_SIGNALING_URLS=ws://sora2.uclab.jp:5000/signaling
+    SORA_SIGNALING_URLS=wss://sora2.uclab.jp:5000/signaling
     SORA_CHANNEL_ID=sora
     SORA_CTRL_LABEL="#ctrl"
     SORA_STATE_LABEL="#state"

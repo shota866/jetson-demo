@@ -253,6 +253,7 @@ class ManagerNode:
                     self._connection_alive.clear()
                     self._disconnected_event.clear()
                 LOGGER.info("connecting to Sora %s", self.signaling_urls)
+                LOGGER.info("channel_id %s", self.channel_id)
                 conn.connect()
                 if not self._connected_event.wait(timeout=10.0):
                     LOGGER.error("Sora connect timeout")
@@ -572,12 +573,12 @@ class ManagerNode:
 
 
 def load_config(args: argparse.Namespace):
-    urls = os.getenv("SORA_SIGNALING_URLS") or os.getenv("SORA_SIGNALING_URL")
+    urls = os.getenv("VITE_SORA_SIGNALING_URLS") or os.getenv("SORA_SIGNALING_URL")
     if not urls:
-        raise ValueError("SORA_SIGNALING_URL or SORA_SIGNALING_URLS must be set")
+        raise ValueError("SORA_SIGNALING_URL or VITE_SORA_SIGNALING_URLS must be set")
     signaling_urls = [u.strip() for u in urls.split(",") if u.strip()]
-    channel_id = args.room or os.getenv("SORA_CHANNEL_ID") or "sora"
-    ctrl_label = os.getenv("SORA_CTRL_LABEL", "#ctrl")
+    channel_id = args.room or os.getenv("VITE_SORA_CHANNEL_ID") or "sora"
+    ctrl_label = os.getenv("VITE_CTRL_LABEL", "#ctrl")
     state_label = os.getenv("SORA_STATE_LABEL", "#state")
     metadata = os.getenv("SORA_METADATA")
     parsed_meta = json.loads(metadata) if metadata else {}
@@ -588,13 +589,13 @@ def load_config(args: argparse.Namespace):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Sora Data-Channel Manager")
-    parser.add_argument("--room", help="Sora room ID (overrides SORA_CHANNEL_ID)")
+    parser.add_argument("--room", help="Sora room ID (overrides VITE_SORA_CHANNEL_ID)")
     parser.add_argument("--password", help="Room password (injects into metadata)")
     parser.add_argument("--estop", action="store_true", help="Trigger immediate estop on start")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s %(name)s: %(message)s")
-    load_dotenv()
+    load_dotenv("/Users/tsunogayashouta/aframe-manager-demo/ui/.env")
     cfg = load_config(args)
     node = ManagerNode(*cfg)
 
