@@ -14,3 +14,4 @@ ui/node_modules/
 server/.env
 .DS_Store
 robot_ui/assets/kenney_car-kit/
+node_modules/
